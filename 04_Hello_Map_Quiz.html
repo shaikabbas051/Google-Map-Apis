@@ -4,7 +4,7 @@ API Course, Lesson 1 -->
  <head>
  <!-- styles put here, but you can include a CSS file and reference it instead! -->
    <style type="text/css">
-     html, body { height: 100%; margin: 0; padding: 0; }
+     html, body { height: 100%; margin: 0; padding: 0;}
      #map { height: 100%; }
    </style>
  </head>
@@ -16,18 +16,43 @@ API Course, Lesson 1 -->
      var map;
      // TODO: Complete the following function to initialize the map
      function initMap() {
-      var hyderabad = new google.maps.LatLng(17.385044,78.486671);
-       // TODO: use a constructor to create a new map JS object. You can use the coordinates
-       // we used, 40.7413549, -73.99802439999996 or your own!
-       map = new google.maps.Map(document.getElementById('map'),{center: hyderabad,zoom: 10});
+        var india = new google.maps.LatLng(20.13847031,77.78320313);
+         // TODO: use a constructor to create a new map JS object. You can use the coordinates
+         // we used, 40.7413549, -73.99802439999996 or your own!
+        map = new google.maps.Map(document.getElementById('map'),{center: india,zoom: 5});
      
-     var charminar = new google.maps.LatLng(17.361575,78.474655);
+     /*var charminar = new google.maps.LatLng(17.361575,78.474655);
 
-
-     var marker = new google.maps.Marker({position: charminar});
+     var marker = new google.maps.Marker({position: charminar, title: 'Ye hyderabad hai'});
      marker.setMap(map);
-     }
      
+     var infowindow = new google.maps.InfoWindow({content: 'Ye hyderabad hai Chicha'});
+
+     marker.addListener('click',function(){
+      infowindow.open(map,marker);
+     })*/
+    
+       var markers = [];
+       var locations = [
+         {title: 'Hyderabad', location:{lat:17.39257927, lng:78.4753418}},
+         {title: 'Banglore', location:{lat:12.96173584, lng:77.57446289}},
+         {title: 'Delhi', location:{lat:28.61345942,lng:77.22290039}},
+         {title: 'Mumbai', location:{lat:19.02057711,lng:72.89428711}},
+         {title: 'Kolkata', location:{lat:22.53285371,lng:88.36303711}}
+        ];
+       for(var i = 0; i < locations.length; i++){
+          var titles = locations[i].title;
+          var positions = locations[i].location;
+
+          var marker = new google.maps.Marker({
+            position: positions,
+            title: titles
+          });
+
+          markers.push(marker);
+          marker.setMap(map);
+        }
+    }
    </script>
    <!--TODO: Load the JS API ASYNCHRONOUSLY below.-->
    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLqz9_TGaRLlzRXjzKABgewLRXy1nHSbg&callback=initMap">
