@@ -11,7 +11,10 @@ API Course, Lesson 1 -->
  </head>
  <body>
    <!-- TODO 1: Create a place to put the map in the HTML-->
+   <button id="show" onclick="show()">Show Markers</button>
+   <button id="hide" onclick="hide()">Hide Markers</button>
    <div id="map"></div>
+   
    <script>
      // TODO: Create a map variable
      var map;
@@ -32,7 +35,9 @@ API Course, Lesson 1 -->
      marker.addListener('click',function(){
       infowindow.open(map,marker);
      })*/
-    
+   }
+  
+    function show(){
        var markers = [];
        var model = {
         locations: [
@@ -72,7 +77,14 @@ API Course, Lesson 1 -->
             }
            })(marker,content,map));
         }
-    }
+        }
+      
+        function hide() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        };
+      }
+      
    </script>
    <!--TODO: Load the JS API ASYNCHRONOUSLY below.-->
    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLqz9_TGaRLlzRXjzKABgewLRXy1nHSbg&callback=initMap">
