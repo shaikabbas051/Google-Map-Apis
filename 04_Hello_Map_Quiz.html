@@ -1,86 +1,51 @@
-<!-- This is the corresponding "starter code" for 04_Hello Map in Udacity and Google's Maps
-API Course, Lesson 1 -->
+
 <html>
+
  <head>
   <title>Places in Hyderabad</title>
- <!-- styles put here, but you can include a CSS file and reference it instead! -->
-   <style type="text/css">
-     html, body { height: 100%; margin: 0; padding: 0;}
-     #map { height: 100%; }
-     button{background-color: white;border-color: white}
-     p{font-size: 14px, font-weight: bold;}
-   </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" type="text/css" href="css/style.css">
  </head>
+
  <body>
-   <!-- TODO 1: Create a place to put the map in the HTML-->
-   <span>Now you can show or hide the markers.</span>
-   <button id="show" onclick="show()"><p>Show Markers</p></button>
-   <button id="hide" onclick="hide()"><p>Hide Markers</p></button>
-   <div id="map"></div>
+    
+      <div id="option">
+        <div>
+          <h3>Now you can show or hide the markers.</h3>
+          <input  id="show" type="button" value="Show">
+          <input  id="hide" type="button" value="Hide">
+        </div>
+        <hr>
+        <div>
+          <h3>Enter area and click Zoom to get clear view</h3>
+          <input id="zoomtext" type="text" placeholder="ex: Charminar, Hyderabad">
+          <input id="zoombtn" type="button" value="Zoom">
+        </div>
+        <hr>
+        <div>
+          <span>within</span>
+          <select>
+            <option>10mins</option>
+            <option>20mins</option>
+            <option>30mins</option>
+            <option>40mins</option>
+            <option>1hr</option>
+          </select>
+          <select>
+            <option>Walk</option>
+            <option>Bicycle</option>
+            <option>Transit</option>
+            <option>Airways</option>
+          </select>
+          <span>of</span>
+          <input id="searchtext" type="text" placeholder="ex: museum">
+          <input id="calcdist" type="button" value="GO">
+        </div>
+      </div>
+        <div id="map"></div>
    
-   <script>
-     // TODO: Create a map variable
-     var map;
-     var markers = [];
-     // TODO: Complete the following function to initialize the map
-     function initMap() {
-        var india = new google.maps.LatLng(17.33012907,78.58177185);
-         // TODO: use a constructor to create a new map JS object. You can use the coordinates
-         // we used, 40.7413549, -73.99802439999996 or your own!
-        map = new google.maps.Map(document.getElementById('map'),{center: india,zoom: 11});
-        var model = {
-           locations: [
-                       {title: 'Golconda', location:{lat:17.38333385, lng:78.40104461}},
-                       {title: 'Charminar', location:{lat:17.3615636, lng:78.4746645}},
-                       {title: 'Ramoji Film City', location:{lat:17.25410515,lng:78.68082047}},
-                       {title: 'Falaknuma Palace', location:{lat:17.33150785,lng:78.466115}},
-                       {title: 'Buddha Statue', location:{lat:17.4155731,lng:78.4749823}}
-                       ],
-            contents: ['Golkonda is a citadel and fort in Hyderabad and was the capital of the medieval sultanate of the Qutb Shahi dynasty.',
-               'The Charminar is a monument and mosque located in Hyderabad and is listed among the most recognized structures of India.',
-                'The Ramoji Film City, At 2000 acres, is the largest studio complex in the world.',
-                'Falaknuma palace of Hyderabad was built by Nawab Vikar-ul-Umra, means "Like the Sky" in Urdu.',
-                'The Buddha Statue is the worlds tallest monolith of Gautama Buddha.']
-            }
-      for(var i = 0; i < model.locations.length; i++){
-          var titles = model.locations[i].title;
-          var positions = model.locations[i].location;
-          //set marker
-          var marker = new google.maps.Marker({
-            position: positions,
-            title: titles,
-            animation: google.maps.Animation.DROP
-            });
-          // push each marker in to markers array
-          markers.push(marker);
-          //declaring the content
-          var content = model.contents[i];
-          //infowindow class to show information
-          var infowindow = new google.maps.InfoWindow({maxWidth: 200});
-          //Event Listener when clicked on marker display info window
-          marker.addListener('click',(function(marker,content,map){
-              return function(){
-              infowindow.setContent(content);
-              infowindow.open(map,marker);}
-            })(marker,content,map));
-      }
-    }
-    //show markers when button clicked
-    function show(){
-          for (var i = 0; i < markers.length; i++){
-            markers[i].setMap(map);
-          }
-        }
-    //hide markers when button clicked
-    function hide(){
-          for (var i = 0; i < markers.length; i++){
-            markers[i].setMap(null);
-            //set markers are to null(empty markers array)
-          }
-        } 
-   </script>
-   <!--TODO: Load the JS API ASYNCHRONOUSLY below.-->
-   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLqz9_TGaRLlzRXjzKABgewLRXy1nHSbg&callback=initMap">
-   </script>
+    <script src="js/app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBLqz9_TGaRLlzRXjzKABgewLRXy1nHSbg&callback=initMap"></script>
  </body>
 </html>
